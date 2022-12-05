@@ -75,7 +75,7 @@ import { MenuScene } from './menu.js';
     }
     start() {
       let last = performance.now(),
-        step = 1 / 60,
+        step = 1 / 30,
         dt = 0,
         now;
 
