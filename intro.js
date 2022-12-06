@@ -38,7 +38,7 @@ export let IntroScene = class {
 
     // draw big logo text
     ctx.globalAlpha = Math.min(1, this.elapsedTime / this.logoRevealTime);
-    ctx.font = '80px Helvetica';
+    ctx.font = this.game.canvas.height * 0.3 + 'px Helvetica';
     ctx.fillStyle = '#fff';
     ctx.fillText(
       this.bigText,
@@ -52,7 +52,7 @@ export let IntroScene = class {
         1,
         (this.elapsedTime - this.logoRevealTime) / this.textTypingTime
       );
-      ctx.font = '20px Helvetica';
+      ctx.font = this.game.canvas.height * 0.1 + 'px Helvetica';
       ctx.fillStyle = '#bbb';
       ctx.fillText(
         this.infoText.substr(

@@ -11,12 +11,14 @@ import { MenuScene } from './menu.js';
 
   // Main Game Class
   var Game = class {
-    constructor() {
+    constructor(wrapper = document.body) {
       this.canvas = document.createElement('canvas');
-      document.body.append(this.canvas);
-      this.canvas.width = 400;
-      this.canvas.height = 400;
-      this.canvas.style='border:1px solid red';
+      wrapper.append(this.canvas);
+      this.canvas.width = wrapper.width || wrapper.clientWidth;
+      this.canvas.width = this.canvas.width > 800 ? 800 : this.canvas.width;
+      this.canvas.height = wrapper.height || wrapper.clientHeight;
+      this.canvas.height = (this.canvas.width / 16) * 9;
+      this.canvas.style = 'border:1px solid red';
       this.ctx = this.canvas.getContext('2d');
       this.setScene(MenuScene);
       this.initInput();
@@ -34,13 +36,13 @@ import { MenuScene } from './menu.js';
       this.canvas.addEventListener('touchstart', (e) => {
         document.body.append(' ' + e.changedTouches[0].screenX + ' ');
       });
-      this.click = {'x':0,'y':0};
+      this.click = { x: 0, y: 0 };
       this.canvas.addEventListener('click', (e) => {
         let xy = getCursorPosition(this.canvas, e);
 
         this.click['x'] = Math.floor(xy[0]);
         this.click['y'] = Math.floor(xy[1]);
-        log(`x=${this.click.x} y=${this.click.y}`)
+        log(`x=${this.click.x} y=${this.click.y}`);
       });
     }
     checkKeyPress(keyCode) {
@@ -104,4 +106,4 @@ let bData = {};
 bData.val = 9;
 log(bData);
 
-document.body.style.backgroundColor="#555"
+document.body.style.backgroundColor = '#555';

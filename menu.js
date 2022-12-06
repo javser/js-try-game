@@ -10,8 +10,8 @@ export let MenuScene = class {
     this.opacityDirection = 1;
     this.menuActiveOpacity = 0;
     this.menuIndex = 0;
-    this.menuTitle = 'Game Menu';
-    this.menuItems = ['Start', 'Intro', 'Exit'];
+    this.menuTitle = 'Меню игры';
+    this.menuItems = ['Старт', 'Сцена', 'Выход'];
     this.elems = [];
     this.checkedItem = false;
     //console.log(this.menuItems.entries().next());
@@ -74,25 +74,29 @@ export let MenuScene = class {
     ctx.fillRect(0, 0, this.game.canvas.width, this.game.canvas.height);
 
     // draw menu title
-    ctx.font = '60px Helvetica';
+    ctx.font = this.game.canvas.height * 0.15 + 'px Helvetica';
     ctx.textBaseline = 'top';
     ctx.fillStyle = '#fff';
     ctx.fillText(
       this.menuTitle,
-      Math.floor((this.game.canvas.width - ctx.measureText(this.menuTitle).width) / 2),
+      Math.floor(
+        (this.game.canvas.width - ctx.measureText(this.menuTitle).width) / 2
+      ),
       20
     );
 
     // draw menu items
-    const itemHeight = 170,
-      fontSize = 40;
+    const itemHeight = this.game.canvas.height * 0.33,
+      fontSize = this.game.canvas.height * 0.08;
     ctx.font = fontSize + 'px Helvetica';
     for (const [index, item] of this.menuItems.entries()) {
       if (index === this.menuIndex) {
         ctx.globalAlpha = this.menuActiveOpacity;
         ctx.fillStyle = '#089cd3';
         ctx.fillRect(
-          Math.floor(0 + (index * this.game.canvas.width) / this.menuItems.length),
+          Math.floor(
+            0 + (index * this.game.canvas.width) / this.menuItems.length
+          ),
           Math.floor(this.game.canvas.height / 3),
           Math.floor(this.game.canvas.width / this.menuItems.length),
           itemHeight
@@ -116,7 +120,9 @@ export let MenuScene = class {
         this.elems.push({
           name: item,
           i: index,
-          x: Math.floor((index * this.game.canvas.width) / this.menuItems.length),
+          x: Math.floor(
+            (index * this.game.canvas.width) / this.menuItems.length
+          ),
           y: Math.floor(this.game.canvas.height / 3),
           width: Math.floor(this.game.canvas.width / this.menuItems.length),
           height: itemHeight,

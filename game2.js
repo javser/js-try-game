@@ -98,7 +98,7 @@ export let GameScene = class {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = 'lime';
-    ctx.font = '20px Helvetica';
+    ctx.font = this.game.canvas.height * 0.07 + 'px Helvetica';
     ctx.fillText('Очки: ' + this.score, 4, this.game.canvas.height - 10);
 
     if (this.frameCount % 60 == 0) arrayBubbles.push(new Bubble(this.game));
