@@ -54,6 +54,24 @@ let Bubble = class {
   }
 };
 let arrayBubbles = [];
+class Ui {
+  constructor(game){
+    this.game = game;
+  }
+  update(dt){
+
+  }
+  render(ctx){
+    ctx.save();
+    ctx.fillStyle = 'lime';
+    ctx.shadowColor = '#000';
+    ctx.shadowOffsetX=2;
+    ctx.shadowOffsetY=2;
+    ctx.font = this.game.canvas.height * 0.05 + 'px Helvetica';
+    ctx.fillText('Очки: ' + this.game.activeScene.score, 4, this.game.canvas.height - 10);
+    ctx.restore()
+  }
+}
 
 // Main game scene
 export let GameScene = class {
@@ -64,6 +82,7 @@ export let GameScene = class {
 
     this.player = new Player(game);
     arrayBubbles.push(new Bubble(game));
+    this.ui = new Ui(game)
     this.audio1 = document.createElement('audio');
     this.audio1.src =
       'https://opengameart.org/sites/default/files/bubbles-single1.wav';
@@ -94,12 +113,10 @@ export let GameScene = class {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = '#444';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = 'lime';
-    ctx.font = this.game.canvas.height * 0.07 + 'px Helvetica';
-    ctx.fillText('Очки: ' + this.score, 4, this.game.canvas.height - 10);
+    this.ui.render(ctx)
 
     if (this.frameCount % 60 == 0) arrayBubbles.push(new Bubble(this.game));
 
